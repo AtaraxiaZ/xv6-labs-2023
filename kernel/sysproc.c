@@ -5,6 +5,7 @@
 #include "memlayout.h"
 #include "spinlock.h"
 #include "proc.h"
+#include "sysinfo.h"
 
 uint64
 sys_exit(void)
@@ -97,4 +98,12 @@ sys_trace(void)
 {
   argint(0, &myproc()->tracemask);
   return 0;
+}
+
+uint64
+sys_sysinfo(void)
+{
+  uint64 info;
+  argaddr(0, &info);
+  return systeminfo(info);
 }
